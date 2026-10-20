@@ -135,46 +135,6 @@ python -m gestalt.region1024.benchmark \
     --sample C1
 ```
 
-## Controllable synthesis
-
-Provide a marker file in the form `{"cell_type": ["GENE1", "GENE2"]}`.
-
-```bash
-python -m gestalt.synthesis.generate \
-    --samples C1,C2 \
-    --markers markers.json \
-    --mode celltype \
-    --mapper-ckpt "$SPATIALGENE_CKPT/<mapper>.pt" \
-    --pixcell-lora "$SPATIALGENE_CKPT/<adapter>/step_8000"
-
-python -m gestalt.synthesis.generate \
-    --samples C2 \
-    --markers markers.json \
-    --mode density \
-    --density-counts 19,28,38,48,66 \
-    --mapper-ckpt "$SPATIALGENE_CKPT/<mapper>.pt" \
-    --pixcell-lora "$SPATIALGENE_CKPT/<adapter>/step_8000"
-
-python -m gestalt.synthesis.generate \
-    --samples C2 \
-    --markers markers.json \
-    --mode composition \
-    --composition-types melanoma,tcell \
-    --composition-fracs 0.0,0.25,0.5,0.75,1.0 \
-    --mapper-ckpt "$SPATIALGENE_CKPT/<mapper>.pt" \
-    --pixcell-lora "$SPATIALGENE_CKPT/<adapter>/step_8000"
-```
-
-## Gene importance
-
-```bash
-python -m eval.gene_importance \
-    --samples NCBI875,NCBI884 \
-    --ckpt "$SPATIALGENE_CKPT/<mapper>.pt" \
-    --out "$SPATIALGENE_OUT" \
-    --save-dir figures/gene_importance
-```
-
 ## License
 
 See [LICENSE](LICENSE).
